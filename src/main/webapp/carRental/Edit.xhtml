@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditCarRentalTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditCarRentalLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{carRentalController.selected.id}" title="#{bundle.EditCarRentalTitle_id}" required="true" requiredMessage="#{bundle.EditCarRentalRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditCarRentalLabel_startDate}" for="startDate" />
+                    <h:inputText id="startDate" value="#{carRentalController.selected.startDate}" title="#{bundle.EditCarRentalTitle_startDate}" required="true" requiredMessage="#{bundle.EditCarRentalRequiredMessage_startDate}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditCarRentalLabel_daysAmount}" for="daysAmount" />
+                    <h:inputText id="daysAmount" value="#{carRentalController.selected.daysAmount}" title="#{bundle.EditCarRentalTitle_daysAmount}" required="true" requiredMessage="#{bundle.EditCarRentalRequiredMessage_daysAmount}"/>
+                    <h:outputLabel value="#{bundle.EditCarRentalLabel_price}" for="price" />
+                    <h:inputText id="price" value="#{carRentalController.selected.price}" title="#{bundle.EditCarRentalTitle_price}" required="true" requiredMessage="#{bundle.EditCarRentalRequiredMessage_price}"/>
+                    <h:outputLabel value="#{bundle.EditCarRentalLabel_carId}" for="carId" />
+                    <h:selectOneMenu id="carId" value="#{carRentalController.selected.carId}" title="#{bundle.EditCarRentalTitle_carId}" required="true" requiredMessage="#{bundle.EditCarRentalRequiredMessage_carId}">
+                        <f:selectItems value="#{carController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.EditCarRentalLabel_clientId}" for="clientId" />
+                    <h:selectOneMenu id="clientId" value="#{carRentalController.selected.clientId}" title="#{bundle.EditCarRentalTitle_clientId}" required="true" requiredMessage="#{bundle.EditCarRentalRequiredMessage_clientId}">
+                        <f:selectItems value="#{userController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{carRentalController.update}" value="#{bundle.EditCarRentalSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditCarRentalViewLink}"/>
+                <br />
+                <h:commandLink action="#{carRentalController.prepareList}" value="#{bundle.EditCarRentalShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditCarRentalIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
